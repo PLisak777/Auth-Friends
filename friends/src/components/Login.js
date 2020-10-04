@@ -21,7 +21,7 @@ class Login extends React.Component {
 	login = (e) => {
 		e.preventDefault();
 		axiosWithAuth()
-			.post('http://localhost:5000/api/login', { username: 'Lambda School', password: 'i<3Lambd4' })
+			.post('/api/login', { username: 'Lambda School', password: 'i<3Lambd4' })
 			.then((res) => {
 				console.log('pl: Login.js: login results: ', res);
 				localStorage.setItem('token', res.data.payload);
@@ -55,7 +55,7 @@ class Login extends React.Component {
 						value={this.state.credentials.password}
 						onChange={this.handleChange}
 					/>
-					<button>Log In</button>
+					<button type="submit">Log In</button>
 				</form>
 			</div>
 		);
