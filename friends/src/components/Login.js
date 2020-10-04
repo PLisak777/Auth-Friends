@@ -11,19 +11,21 @@ class Login extends React.Component {
 
 	handleChange = (e) => {
 		this.setState({
-			...this.state.credentials,
-			[e.target.name]: e.target.value,
+			credentials: {
+				...this.state.credentials,
+				[e.target.name]: e.target.value,
+			},
 		});
 	};
 
 	login = (e) => {
 		e.preventDefault();
 		axiosWithAuth()
-			.post('/api/login', this.state.credentials)
+			.post('http://localhost:5000/api/login', { username: 'Lambda School', password: 'i<3Lambd4' })
 			.then((res) => {
 				console.log('pl: Login.js: login results: ', res);
 				localStorage.setItem('token', res.data.payload);
-				this.props.history.push('/dashboard');
+				this.props.history.push('/FriendsList');
 			})
 			.catch((err) => {
 				if (err.response) {
@@ -32,7 +34,7 @@ class Login extends React.Component {
 						err.response.data
 					);
 				} else {
-					console.error('Login.js: login faile: err: ', err);
+					console.error('Login.js: login failed: err: ', err);
 				}
 			});
 	};
