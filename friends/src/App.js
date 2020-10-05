@@ -1,32 +1,36 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
-
 import Login from './components/Login';
-import FriendsList from './components/FriendsList';
+import Dashboard from './components/Dashboard';
 
+import styled from 'styled-components';
 import './App.css';
+
+const Container = styled.div`
+background: transparent;
+width: 100%;
+max-width: 1200px;
+margin: 20px auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 20px;
+color: white;
+box-shadow: 0px 1px 6px -2px grey;
+`
 
 function App() {
 	return (
-		<Router>
-			<div className="App">
-				<ul>
-					<li>
-						<Link to="/login">Login</Link>
-					</li>
-					<li>
-						<Link to="/FriendsList">FriendsList</Link>
-					</li>
-				</ul>
+		<div className="App">
+			<Container>
 				<Switch>
-					<PrivateRoute exact path="/FriendsList" component={FriendsList} />
-					<Route path="/login" component={Login} />
-					<Route component={Login} />
+					<Route exact path="/" component={Login} />
+					<PrivateRoute path="/dashboard" component={Dashboard} />
 				</Switch>
-			</div>
-		</Router>
+				</Container>
+		</div>
 	);
-}
+};
 
 export default App;
